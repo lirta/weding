@@ -10,7 +10,7 @@ else {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Pesanan</title>
+  <title>Admin </title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,7 +37,7 @@ else {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Detail Pesanan</h1>
+            <h1>Detail Paket</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -72,13 +72,12 @@ else {
                 </p>
 
                 <hr>
-                <strong><i class="fas fa-book mr-1"></i> Total Item</strong>
+                <strong><i class="fas fa-book mr-1"></i> Total Harga</strong>
                 <?php 
                 $total =mysqli_query($koneksi,"SELECT SUM(harga) as total  FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$_GET[id]' ");
                 $tt=mysqli_fetch_assoc($total); 
                 $uang="Rp ".number_format($tt['total'],2,',','.');
                 ?>
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Total Harga</strong>
 
                 <p class="text-muted"><?php echo "$uang"; ?></p>
 
@@ -151,7 +150,7 @@ else {
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-                <h4 class="modal-title">Add Data</h4>
+                <h4 class="modal-title">Add Item</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -160,7 +159,7 @@ else {
                 <form method="post" action="paket-detail-add-proses.php">
                     <div class="card-body">
                       <div class="form-group">
-                          <label for="rules">Rules</label>
+                          <label for="rules">Item</label>
                           <select class="custom-select rounded-0" id="item" name="item">
                           <?php 
                             $queri_s ="SELECT * FROM item_paket ";
@@ -170,7 +169,7 @@ else {
                             <?php } ?>
                           </select>
                       </div>
-                      <input type="text" class="form-control" id="id" placeholder="Harga" name="id" value="<?php echo "$_GET[id]"; ?>">
+                      <input type="text" class="form-control" id="id" placeholder="Harga" name="id" value="<?php echo "$_GET[id]"; ?>" hidden>
                     </div>
                     <!-- /.card-body -->
 
