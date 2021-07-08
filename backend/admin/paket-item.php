@@ -10,7 +10,7 @@ else {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Paket</title>
+  <title>Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,6 +20,7 @@ else {
   <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -65,6 +66,7 @@ else {
                       <th style="width: 10px">N0</th>
                       <th>Nama</th>
                       <th>Harga</th>
+                      <th>Gambar</th>
                       <th style="width: 150px">aksi</th>
                     </tr>
                   </thead>
@@ -79,6 +81,11 @@ else {
                       <td><?php echo "$no"; ?></td>
                       <td><?php echo "$item[item]"; ?></td>
                       <td><?php echo "$uang"; ?></td>
+                      <td>
+                       <a href="../assets/galery/<?php echo "$item[gambar]" ?>" data-toggle="lightbox" data-title="<?php echo "$item[item]"; ?>" class="btn btn-info">
+                           <i class="nav-icon far fa-image"></i>
+                        </a>
+                      </td>
                       <td>
                         <a href="peket-item-edit.php?id=<?php echo "$item[id]"; ?>" class="btn btn-warning" ><i class="fas fa-edit"></i></a>
                         <a href="peket-item-delete.php?id=<?php echo "$item[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
@@ -117,15 +124,24 @@ else {
                     </button>
                 </div>
                 <div class="modal-body">
-                <form method="post" action="paket-item-add-proses.php">
+                <form method="post" action="paket-item-add-proses.php" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Enter Name Paket" name="nama">
+                            <input type="text" class="form-control" id="nama" placeholder="Enter Name Paket" name="nama" required>
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
-                            <input type="text" class="form-control" id="harga" placeholder="Harga" name="harga">
+                            <input type="text" class="form-control" id="harga" placeholder="Harga" name="harga" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="foto" name="foto" required>
+                                <label class="custom-file-label" for="foto">Choose file</label>
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -160,10 +176,12 @@ else {
 <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+<script src="../plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -179,6 +197,23 @@ else {
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+  });
+  $(function () {
+  bsCustomFileInput.init();
+});
+$(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
     });
   });
 </script>

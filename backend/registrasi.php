@@ -60,8 +60,10 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button> <br>
+            <span> <a href="login.php">Login</a></span>
           </div>
+          
           <!-- /.col -->
         </div>
       </form>

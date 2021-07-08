@@ -22,7 +22,7 @@ if ($ketemu >  0) {
                 if (!empty($folderawal))
                     {
     
-    $queri= "INSERT INTO admin (name,
+    $queri= "INSERT INTO admin (name, 
                                 email,
                                 password,
                                 alamat,
@@ -35,7 +35,7 @@ if ($ketemu >  0) {
                                     '$ps',
                                     '$_POST[alamat]',
                                     '$_POST[hp]',
-                                    '$_POST[rules]',
+                                    '$_POST[rules]', 
                                     '$status',
                                     '$nama'
                                 )";

@@ -88,48 +88,48 @@ else {
             <!-- /.card -->
           </div>
             <div class="col-md-9">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Paket Item</h3> <br>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
-                  Add
-                </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                  
-                    <tr>
-                      <th style="width: 10px">N0</th>
-                      <th>Item</th>
-                      <th>Harga</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                    $querii ="SELECT * FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$_GET[id]'";
-                    $hasill =mysqli_query($koneksi,$querii);
-                    $no = 1;
-                    while ($item=mysqli_fetch_assoc($hasill)) { 
-                    $uang2="Rp ".number_format($item['harga'],2,',','.');?>
-                    <tr>
-                      <td><?php echo "$no" ?></td>
-                      <td><?php echo "$item[item]" ?></td>
-                      <td><?php echo "$uang2" ?></td>
-                      <td>
-                        <a href="peket-detail-delete.php?id=<?php echo "$item[id_daf]"; ?> && idp=<?php echo "$_GET[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
-                    </tr>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Paket Item</h3> <br>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
+                    Add
+                  </button>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <thead>
+                    
+                      <tr>
+                        <th style="width: 10px">N0</th>
+                        <th>Item</th>
+                        <th>Harga</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                     <?php 
-                        $no=$no+1;
-                 } 
-                 ?>
-                  </tbody>
-                </table>
+                      $querii ="SELECT * FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$_GET[id]'";
+                      $hasill =mysqli_query($koneksi,$querii);
+                      $no = 1;
+                      while ($item=mysqli_fetch_assoc($hasill)) { 
+                      $uang2="Rp ".number_format($item['harga'],2,',','.');?>
+                      <tr>
+                        <td><?php echo "$no" ?></td>
+                        <td><?php echo "$item[item]" ?></td>
+                        <td><?php echo "$uang2" ?></td>
+                        <td>
+                          <a href="peket-detail-delete.php?id=<?php echo "$item[id_daf]"; ?> && idp=<?php echo "$_GET[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                      </tr>
+                      <?php 
+                          $no=$no+1;
+                  } 
+                  ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>

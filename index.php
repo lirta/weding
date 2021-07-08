@@ -53,6 +53,7 @@
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Packages</a></li>
+          <li><a href="#portfolio">Galery</a></li>
           <li><a href="#contact">Contact Us</a></li>
           <li class="drop-down"><a href="">Log In</a>
             <ul>
@@ -156,6 +157,7 @@
                 <li><i class="bx bx-check-double"></i><?php echo "$item[item]"; ?></li>
               </ul>
               <?php } ?>
+              <a href="backend/login.php" class="btn btn-primary"> pesan</a>
             </div>
           </div>
           <?php }?>
@@ -163,6 +165,41 @@
 
       </div>
     </section><!-- End Services Section -->
+
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Galery</h2>
+        </div>
+
+        <div class="row">
+        </div>
+
+        <div class="row portfolio-container">
+        <?php
+        $qgalery ="SELECT * FROM item_paket ";
+        $hgalery =mysqli_query($koneksi,$qgalery);
+        while ($galery=mysqli_fetch_assoc($hgalery)) { 
+          ?>
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web wow fadeInUp" data-wow-delay="0.1s">
+            <div class="portfolio-wrap">
+              <figure>
+                <img src="backend/assets/galery/<?php echo "$galery[gambar]"; ?>" class="img-fluid" alt="">
+                <a href="backend/assets/galery/<?php echo "$galery[gambar]"; ?>" class="link-preview venobox" data-gall="portfolioGallery" title="Preview"><i class="bx bx-plus"></i></a>
+              </figure>
+
+              <div class="portfolio-info">
+                <h4><a href="portfolio-details.html"><?php echo "$galery[item]"; ?></a></h4>
+              </div>
+            </div>
+          </div>
+          <?php } ?>
+
+        </div>
+
+      </div>
+    </section>
 
 
     <!-- ======= Contact Section ======= -->

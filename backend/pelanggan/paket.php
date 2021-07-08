@@ -11,7 +11,7 @@ else {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Paket</title>
+  <title>Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,6 +21,7 @@ else {
   <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../plugins/ekko-lightbox/ekko-lightbox.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -89,7 +90,10 @@ else {
                             <?php
                               $total_item =mysqli_query($koneksi,"SELECT *  FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$paket[id]' ");
                               while($tt_item=mysqli_fetch_assoc($total_item)){ ?>
-                              <li><?php echo "$tt_item[item]"; ?></li>
+                              <li>
+                              <a href="../assets/galery/<?php echo "$tt_item[gambar]" ?>" data-toggle="lightbox" data-title="<?php echo "$tt_item[item]"; ?>" >
+                              <?php echo "$tt_item[item]"; ?>
+                              </a> </li>
                               <?php   } ?>
                             </ul>
                         </td>
@@ -144,10 +148,12 @@ else {
 <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+<script src="../plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -163,6 +169,23 @@ else {
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+  });
+  $(function () {
+  bsCustomFileInput.init();
+});
+$(function () {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    $('.filter-container').filterizr({gutterPixels: 3});
+    $('.btn[data-filter]').on('click', function() {
+      $('.btn[data-filter]').removeClass('active');
+      $(this).addClass('active');
     });
   });
 </script>
