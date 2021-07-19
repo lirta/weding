@@ -2,10 +2,14 @@
     <div class="col-md-3">
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
-                <h3 class="profile-username text-center"><?php echo "$paket[paket]"; ?></h3>
+                <h3 class="profile-username text-center"><?php echo "$paket[name]"; ?></h3>
+                <strong>Paket</strong>
+                <p class="text-muted"><?php echo "$paket[paket]"; ?></p>
+                <hr>
+
                 <strong>Harga Paket</strong>
                     <?php 
-                    $total =mysqli_query($koneksi,"SELECT SUM(harga) as total  FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$paket[paket_id]' ");
+                    $total =mysqli_query($koneksi,"SELECT SUM(harga) as total  FROM custom INNER JOIN item_paket on custom.id_item = item_paket.id WHERE  id_pesanan ='$_GET[id]' ");
                     $tt=mysqli_fetch_assoc($total); 
                     $uang="Rp ".number_format($tt['total'],2,',','.');
                     ?>
@@ -21,15 +25,13 @@
                         while($jum_k=mysqli_fetch_assoc($total_ketring)){
                         $sub_t=$jum_k['jumlah']*$jum_k['harga'];
                         $total_ket=$total_ket+$sub_t;
-                        }
+                    }
                         $total_semua=$tt['total'] + $total_ket;
                         $uangk="Rp ".number_format($total_ket,2,',','.'); ?>
-                <a href="ketring.php?id=<?php echo"$_GET[id]"; ?>" class="btn btn-warning float-right"><i class="fas fa-edit"></i></a>
                 <p class="text-muted"><?php echo "$uangk"; ?></p>
                     <?php }else{ ?>
-                <a href="ketring.php?id=<?php echo"$_GET[id]"; ?>" class="btn btn-primary float-right"><i class="fas fa-plus"></i></a>
                 <p class="text-muted">Tidak ada Ketring</p>
-                    <?php $total_semua=$tt['total']; } ?>
+                    <?php  $total_semua=$tt['total']; }?>
                 <hr>
 
                 <strong>Total pembayaran</strong>
@@ -47,6 +49,22 @@
                     $uangg="Rp ".number_format($sisa,2,',','.'); ?>
                 <p class="text-muted"><?php echo "$uangg"; ?></p>
                 <hr>
+                <hr>
+                <?php if ($paket['status'] == "selesai") {
+                              # code...
+                            }else{?>
+                            <a href="proses-pesanan.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-primary">
+                              <?php 
+                                if ($paket['status'] == "konfirmasi") {
+                                  echo "Proses";
+                                }elseif ($paket['status'] == "proses") {
+                                  echo "Selesai";
+                                }
+                              ?>
+                          
+                            </a>
+                              <?php } ?>
+                <hr>
 
             </div>
         </div>
@@ -54,10 +72,7 @@
     <div class="col-md-9">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tabel Pembayaran</h3> <br>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
-                  Pembayaran
-                </button>
+                <h3 class="card-title">Tabel Pembayaran</h3> 
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -78,7 +93,7 @@
                     while($pem=mysqli_fetch_assoc($qr)){
                       $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>
                     <tr>
-                      <td><?php echo "$no";?></td>
+                      <td>1.</td>
                       <td><?php echo "$pem_t";?></td>
                       <td>
                         <a href="../assets/pembayaran/<?php echo "$pem[bukti]";?>" data-toggle="lightbox" data-title="<?php echo "$pem_t";?>">
@@ -94,7 +109,6 @@
               </div>
             </div>
           </div>
-        </div>
     </div>
 <div class="row">
     <div class="col-md-6">
@@ -108,12 +122,12 @@
                         <tr>
                             <th style="width: 10px">N0</th>
                             <th>item</th>
-                            <th>Gambar</th>
+                            <th style="width: 20px">Gambar</th>
                           </tr>
                     </thead>
                     <tbody>
                         <?php 
-                        $querik ="SELECT * FROM daftar_item INNER JOIN item_paket on daftar_item.item_id=item_paket.id WHERE paket_id ='$paket[paket_id]' ";
+                        $querik ="SELECT * FROM custom INNER JOIN item_paket on custom.id_item = item_paket.id WHERE  id_pesanan ='$_GET[id]' ";
                         $hasilk =mysqli_query($koneksi,$querik);
                         $no=1;
                         while ($item_p=mysqli_fetch_assoc($hasilk)) {
@@ -173,5 +187,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

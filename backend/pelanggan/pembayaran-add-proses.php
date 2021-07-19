@@ -4,6 +4,7 @@ include '../config/config.php';
 
 
 
+$date = date("Y-m-d");
     $acak = rand(00000000, 99999999);
     $namafoto = $_FILES['foto']['name'];
     			$nama = $acak.$namafoto;
@@ -12,11 +13,12 @@ include '../config/config.php';
     
     			move_uploaded_file($folderawal,$foldertujuan.$nama);
     
-    $queri= "INSERT INTO pembayaran (pesanan_id,jumlah,bukti,reg) VALUES (
+    $queri= "INSERT INTO pembayaran (pesanan_id,jumlah,bukti,reg,tgl_bayar) VALUES (
                                     '$_POST[id]',
                                     '$_POST[jumlah]',
                                     '$nama',
-                                    '$_POST[reg]'
+                                    '$_POST[reg]',
+                                    '$date'
                                 )";
                                 // echo ($queri);
     

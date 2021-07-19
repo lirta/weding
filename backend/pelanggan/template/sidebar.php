@@ -31,52 +31,27 @@
           </li>
           <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Profile
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+            <a href="paket.php" class="nav-link">
+            <i class="nav-icon fas fa-hand-holding-heart"></i>
               <p>
                 Paket Wedding
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="paket.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Paket Wedding</p>
-                </a>
-              </li>
-              
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+            <a href="pesanan.php" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice"></i>
               <p>
                 pesanan
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pesanan.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pesanan Wedding</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ketring.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pesanan Ketring</p>
-                </a>
-              </li>
-            </ul>
             <li class="nav-item">
             <a href="../logout.php" class="nav-link">
               <i class="nav-icon far fa-image"></i>

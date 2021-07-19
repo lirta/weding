@@ -42,6 +42,13 @@ else {
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Detail Pesanan</h1>
+            <div class="callout callout-info">
+              <h5><i class="fas fa-info"></i> Note:</h5>
+              Silahkan Melakukan Pembayaran Ke Bank <br>
+              BCA <br>
+              a/n : SAMUDRA WEDDING <br>
+              No Reg : 1234567890
+            </div>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -50,64 +57,15 @@ else {
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-                    <?php 
-                    $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE id_pesanan = '$_GET[id]' ";
-                    $hasil =mysqli_query($koneksi,$queri);
-                    $paket=mysqli_fetch_assoc($hasil); ?>
-        
-                        <?php if ($paket['paket'] == "Custom") {
-                          include "pesanan-sub-detail-costum.php";
-                        }else{ include "pesanan-sub-detail.php";} ?>
-                        
-                    
-        <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Tabel Pembayaran</h3> <br>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
-                  Pembayaran
-                </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                  
-                    <tr>
-                      <th style="width: 10px">N0</th>
-                      <th>No Reg</th>
-                      <th>Jumlah</th>
-                      <th>Bukti Pembayaran</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                    $qr =mysqli_query($koneksi,"SELECT *  FROM pembayaran WHERE  pesanan_id ='$paket[id_pesanan]' ");
-                    $no=1;
-                    while($pem=mysqli_fetch_assoc($qr)){
-                      $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>
-                    <tr>
-                      <td><?php echo "$no";?></td>
-                      <td><?php echo "$pem[reg]";?></td>
-                      <td><?php echo "$pem_t";?></td>
-                      <td>
-                        <a href="../assets/pembayaran/<?php echo "$pem[bukti]";?>" data-toggle="lightbox" data-title="<?php echo "$pem_t";?>">
-                        <?php echo "$pem[bukti]";?>
-                        </a>
-                      </td>
-                      <td>
-                        <a href="pembayaran-delete.php?id=<?php echo "$pem[id]"; ?> && ps=<?php echo "$paket[id_pesanan]"; ?> " class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
-                    </tr>
-                    <?php $no++; } ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <?php 
+        $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE id_pesanan = '$_GET[id]' ";
+        $hasil =mysqli_query($koneksi,$queri);
+        $paket=mysqli_fetch_assoc($hasil); ?>
+
+            <?php if ($paket['paket'] == "Custom") {
+              include "pesanan-sub-detail-costum.php";
+            }else{ include "pesanan-sub-detail.php";} ?>
+        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>

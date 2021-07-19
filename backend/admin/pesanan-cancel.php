@@ -66,27 +66,25 @@ else {
                       <th>Tanggal Pesta</th>
                       <th>Alamat Pesta</th>
                       <th>Status</th>
-                      <th style="width: 150px">aksi</th>
+                      <th style="width: 200px">aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id
-                                                  inner join pelanggan on pesanan.pelanggan_id=pelanggan.id WHERE status='konfirmasi'  ";
+                  <?php 
+                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE status='cancel'  ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $no = 1;
                     while ($paket=mysqli_fetch_assoc($hasil)) {
                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$paket[name]"; ?></td>
+                      <td><?php echo "$_SESSION[name]"; ?></td>
                       <td><?php echo "$paket[paket]"; ?></td>
                       <td><?php echo "$paket[tgl_pesan]"; ?></td>
                       <td><?php echo "$paket[tgl_pesta]"; ?></td>
                       <td><?php echo "$paket[alamat]"; ?></td>
                       <td><?php echo "$paket[status]"; ?></td>
-                      <td>
-                        <a href="pesanan-delete.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>    
+                      <td>  
                         <a href="pesanan-detail.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
                       </td>
                     </tr>

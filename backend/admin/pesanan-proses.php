@@ -84,11 +84,11 @@ else {
                       <td><?php echo "$paket[tgl_pesta]"; ?></td>
                       <td><?php echo "$paket[alamat]"; ?></td>
                       <td><?php echo "$paket[status]"; ?></td>
-                      <td>
-                        <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>    
+                      <td>  
+                      <a href="pesanan-delete.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         <a href="pesanan-detail.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
                       </td>
-                    </tr>
+                    </tr> 
                     <?php 
                         $no=$no+1;
                     }
