@@ -55,7 +55,7 @@ else {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
                       <div class="card">
                         <div class="card-header">
                           <h4>Form Pemesanan</h4>
@@ -80,18 +80,9 @@ else {
                                     <label for="alamat">Alamat Pesta</label>
                                     <input type="text" class="form-control" id="alamat" placeholder="Enter alamat" name="alamat" required >
                                 </div>
-                                <div class="form-group">
-                                  <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="1"  name="ketring">
-                                    <label for="customCheckbox1" class="custom-control-label">+ Ketring</label> <br>
-                                    <span>Silahkan ceklis jika anda ingin menambah ketring</span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox2" value="option1" required>
-                                    <label for="customCheckbox2" class="custom-control-label">Syarat & Perjanjian</label>
-                                  </div>
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1" required>
+                                  <label for="customCheckbox1" class="custom-control-label">Syarat & Perjanjian</label>
                                 </div>
                             </div>
                             <input type="text" class="form-control" id="id"  placeholder="Enter alamat" name="id" value="<?php echo"$_SESSION[id]" ; ?>"  hidden>
@@ -103,7 +94,7 @@ else {
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <div class="card">
                         <div class="card-header">
                           <h4>Syarat & Perjanjian</h4>

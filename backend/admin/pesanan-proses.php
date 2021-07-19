@@ -49,7 +49,7 @@ else {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tabel Pesanan</h3> <br>
@@ -71,11 +71,10 @@ else {
                   </thead>
                   <tbody>
                   <?php 
-                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id   ";
+                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id WHERE status='proses'   ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $no = 1;
                     while ($paket=mysqli_fetch_assoc($hasil)) {
-                      if ($paket['status'] == "proses") {
                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
@@ -90,7 +89,7 @@ else {
                         <a href="pesanan-detail.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
                       </td>
                     </tr>
-                    <?php } 
+                    <?php 
                         $no=$no+1;
                     }
                     ?>

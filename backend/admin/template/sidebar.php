@@ -31,7 +31,7 @@
           </li>
           <li class="nav-item">
             <a href="profile.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Profile
               </p>
@@ -42,7 +42,7 @@
                 
                 <li class="nav-item">
                   <a href="admin.php" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
+                    <i class="nav-icon far fa-user"></i>
                     <p>
                       Admin
                     </p>
@@ -52,9 +52,9 @@
           ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-hand-holding-heart"></i>
               <p>
-                Paket
+                Paket Weddign
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -62,7 +62,7 @@
               <li class="nav-item">
                 <a href="paket.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Paket</p>
+                  <p>Paket </p>
                 </a>
               </li>
               <li class="nav-item">
@@ -75,8 +75,16 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="kategori.php" class="nav-link">
+              <i class="nav-icon fas fa-utensils"></i>
+              <p>
+               Ketring
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-file-invoice"></i>
               <p>
                 pesanan
                 <i class="right fas fa-angle-left"></i>
@@ -105,15 +113,23 @@
           </li>
           <li class="nav-item">
             <a href="pelanggan.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 Pelanggan
               </p>
             </a>
           </li>
           <li class="nav-item">
+            <a href="laporan.php" class="nav-link">
+              <i class="nav-icon far fa-copy"></i>
+              <p>
+                Laporan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="../logout.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon far fa-sign"></i>
               <p>
                 Log Out
               </p>

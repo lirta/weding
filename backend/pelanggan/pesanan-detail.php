@@ -85,7 +85,57 @@ else {
                     </div>
                 </div>
             </div>
-          <div class="col-md-9">
+            <div class="col-md-9">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Ketring</h3> <br>
+                  <?php 
+                    $querik ="SELECT * FROM kategori_makanan ";
+                    $hasilk =mysqli_query($koneksi,$querik);
+                    while ($ket=mysqli_fetch_assoc($hasilk)) {
+                      ?>
+                  <a href="ketring.php?idm=<?php echo "$ket[id_kategori]";?>&&idp=<?php echo "$_GET[id]"; ?>" class="btn btn-primary btn-md">+ <?php echo "$ket[kategori]";?></a>
+                  <?php } ?>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <thead>
+                    
+                      <tr>
+                        <th style="width: 10px">N0</th>
+                        <th>Makanan</th>
+                        <th>Kategori</th>
+                        <th>Jumlah</th>
+                        <th>aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                      $qr =mysqli_query($koneksi,"SELECT *  FROM pembayaran WHERE  pesanan_id ='$paket[id_pesanan]' ");
+                      $no=1;
+                      while($pem=mysqli_fetch_assoc($qr)){
+                        $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>
+                      <tr>
+                        <td>1.</td>
+                        <td><?php echo "$pem_t";?></td>
+                        <td>
+                          <a href="../assets/pembayaran/<?php echo "$pem[bukti]";?>" data-toggle="lightbox" data-title="<?php echo "$pem_t";?>">
+                          <?php echo "$pem[bukti]";?>
+                          </a>
+                        </td>
+                        <td>
+                          <a href="pembayaran-delete.php?id=<?php echo "$pem[id]"; ?> && ps=<?php echo "$paket[id_pesanan]"; ?> " class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                      </tr>
+                      <?php $no++; } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-9">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tabel Pembayaran</h3> <br>

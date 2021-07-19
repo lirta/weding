@@ -55,7 +55,11 @@ else {
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tabel Paket</h3> <br>
-                
+                <?php 
+                $q_custom =mysqli_query($koneksi,"SELECT * FROM paket WHERE paket='Custom'");
+                $custom=mysqli_fetch_assoc($q_custom);
+                ?>
+                <a href="add-custom.php?id=<?php echo "$custom[id]"; ?>" class="btn btn-primary"><?php echo "$custom[paket]"; ?></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -81,6 +85,9 @@ else {
                       $total =mysqli_query($koneksi,"SELECT SUM(harga) as total  FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$paket[id]' ");
                       $tt=mysqli_fetch_assoc($total); 
                       $uang="Rp ".number_format($tt['total'],2,',','.');
+                      if ($paket['paket'] == "Custom") {
+                        
+                      }else{
                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
@@ -101,14 +108,11 @@ else {
                       
                       <td><?php echo "$uang"; ?></td>
                       <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
-                        Pesan
-                      </button>
+                      <a href="add-pesanan.php?id=<?php echo "$paket[id]"; ?>"class="btn btn-primary">Pesan</a>
                       </td>
                     </tr>
-                    <?php 
+                    <?php  }
                         $no=$no+1;
-                        include 'add-pesanan.php';
                  } 
                  ?>
                   </tbody>

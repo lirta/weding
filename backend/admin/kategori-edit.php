@@ -10,7 +10,7 @@ else {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin</title>
+  <title>Admin | Kategori</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,62 +39,37 @@ else {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pesanan</h1>
+            <h1>Kategori</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
+    <?php 
+                    $queri ="SELECT * FROM kategori_makanan WHERE id_kategori = '$_GET[id]' ";
+                    $hasil =mysqli_query($koneksi,$queri);
+                    $kategori=mysqli_fetch_assoc($hasil); ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Tabel Pesanan</h3> <br>
-              </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">N0</th>
-                      <th>Pelanggan</th>
-                      <th>Paket</th>
-                      <th>Tanggal Pemesanan</th>
-                      <th>Tanggal Pesta</th>
-                      <th>Alamat Pesta</th>
-                      <th>Status</th>
-                      <th style="width: 150px">aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id WHERE status='konfirmasi'  ";
-                    $hasil =mysqli_query($koneksi,$queri);
-                    $no = 1;
-                    while ($paket=mysqli_fetch_assoc($hasil)) {
-                      ?>
-                    <tr>
-                      <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$_SESSION[name]"; ?></td>
-                      <td><?php echo "$paket[paket]"; ?></td>
-                      <td><?php echo "$paket[tgl_pesan]"; ?></td>
-                      <td><?php echo "$paket[tgl_pesta]"; ?></td>
-                      <td><?php echo "$paket[alamat]"; ?></td>
-                      <td><?php echo "$paket[status]"; ?></td>
-                      <td>
-                        <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>    
-                        <a href="pesanan-detail.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
-                      </td>
-                    </tr>
-                    <?php 
-                        $no=$no+1;
-                    }
-                    ?>
-                  </tbody>
-                </table>
+              <form method="post" action="kategori-edit-proses.php">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="kategori">Kategori</label>
+                            <input type="text" class="form-control" id="kategori" placeholder="Enter Name Paket" name="kategori" value="<?php echo "$kategori[kategori]";  ?>">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" id="id" placeholder="Harga" name="id" value="<?php echo "$kategori[id_kategori]";  ?>" hidden>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+              </form>
               </div>
             </div>
           </div>
@@ -113,6 +88,7 @@ else {
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+    
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

@@ -41,7 +41,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Paket
+                Paket Wedding
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -49,7 +49,7 @@
               <li class="nav-item">
                 <a href="paket.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Paket</p>
+                  <p>Paket Wedding</p>
                 </a>
               </li>
               
@@ -67,7 +67,13 @@
               <li class="nav-item">
                 <a href="pesanan.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pesanan</p>
+                  <p>Pesanan Wedding</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ketring.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pesanan Ketring</p>
                 </a>
               </li>
             </ul>

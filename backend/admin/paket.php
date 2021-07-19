@@ -84,17 +84,27 @@ else {
                       $uang="Rp ".number_format($tt['total'],2,',','.');
                       ?>
                     <tr>
-                      <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$paket[paket]"; ?></td>
-                      <td><?php echo "$tt_item"; ?></td> 
-                      <td><?php echo "$uang"; ?></td>
-                      <td>
-                        <a href="paket-edit.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-warning" ><i class="fas fa-edit"></i></a>
-                        <a href="paket-delete.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                        <a href="paket-detail.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
-                      </td>
-                    </tr>
-                    <?php 
+                      <?php if ($paket['paket'] == "Custom") { ?>
+                        
+                        <td><?php echo "$no"; ?></td>
+                        <td><?php echo "$paket[paket]"; ?></td>
+                        <td> - </td> 
+                        <td> - </td>
+                        <td> - </td>
+                      <?php }else{ ?>
+
+                        <td><?php echo "$no"; ?></td>
+                        <td><?php echo "$paket[paket]"; ?></td>
+                        <td><?php echo "$tt_item"; ?></td> 
+                        <td><?php echo "$uang"; ?></td>
+                        <td>
+                          <a href="paket-edit.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-warning" ><i class="fas fa-edit"></i></a>
+                          <a href="paket-delete.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                          <a href="paket-detail.php?id=<?php echo "$paket[id]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
+                        </td>
+                      </tr>
+                      <?php 
+                      } 
                     include 'model-edit-paket.php';
                     $no=$no+1;
                  } 

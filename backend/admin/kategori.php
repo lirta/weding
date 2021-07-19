@@ -10,7 +10,7 @@ else {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin</title>
+  <title>Admin | Ketring</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -39,7 +39,7 @@ else {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pesanan</h1>
+            <h1>Kategori Ketring</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -49,10 +49,12 @@ else {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Tabel Pesanan</h3> <br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
+                  Add
+                </button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -60,39 +62,30 @@ else {
                   <thead>
                     <tr>
                       <th style="width: 10px">N0</th>
-                      <th>Pelanggan</th>
-                      <th>Paket</th>
-                      <th>Tanggal Pemesanan</th>
-                      <th>Tanggal Pesta</th>
-                      <th>Alamat Pesta</th>
-                      <th>Status</th>
-                      <th style="width: 150px">aksi</th>
+                      <th>kategori</th>
+                      <th style="width: 200px">aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php 
-                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id WHERE status='konfirmasi'  ";
+                  <?php 
+                    $queri ="SELECT * FROM kategori_makanan ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $no = 1;
-                    while ($paket=mysqli_fetch_assoc($hasil)) {
+                    while ($kategori=mysqli_fetch_assoc($hasil)) {
                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$_SESSION[name]"; ?></td>
-                      <td><?php echo "$paket[paket]"; ?></td>
-                      <td><?php echo "$paket[tgl_pesan]"; ?></td>
-                      <td><?php echo "$paket[tgl_pesta]"; ?></td>
-                      <td><?php echo "$paket[alamat]"; ?></td>
-                      <td><?php echo "$paket[status]"; ?></td>
+                      <td><?php echo "$kategori[kategori]"; ?></td>
                       <td>
-                        <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>    
-                        <a href="pesanan-detail.php?id=<?php echo "$paket[id_pesanan]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
+                        <a href="kategori-edit.php?id=<?php echo "$kategori[id_kategori]"; ?>" class="btn btn-warning" ><i class="fas fa-edit"></i></a>
+                        <a href="kategori-delete.php?id=<?php echo "$kategori[id_kategori]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        <a href="kategori-detail.php?id=<?php echo "$kategori[id_kategori]"; ?>" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a>
                       </td>
                     </tr>
                     <?php 
-                        $no=$no+1;
-                    }
-                    ?>
+                    $no=$no+1;
+                 } 
+                 ?>
                   </tbody>
                 </table>
               </div>
@@ -113,6 +106,35 @@ else {
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+    <div class="modal fade" id="add">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="kategori-add-proses.php">
+                      <div class="card-body">
+                        <div class="form-group">
+                            <label for="kategori">Kategori</label>
+                            <input type="text" class="form-control" id="kategori" placeholder="Enter kategori" name="kategori">
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                      <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+      </div>
+    </div>
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

@@ -5,7 +5,7 @@ if (empty($_SESSION['email']) AND
     { header('location:../login.php');}
 else {  
 ?>
-<?php include '../config/config.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,13 +35,18 @@ else {
   <?php include 'template/sidebar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
+  <?php 
+  $queri =mysqli_query($koneksi,"SELECT * FROM pesanan WHERE id_pesanan='$_GET[id]'");
+  $paket=mysqli_fetch_assoc($queri);
+  ?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Admin</h1>
+            <h1>Paket Wedding Custom</h1> <br>
+            <a href="pesanan.php" class="btn btn-primary">Selesai</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -51,59 +56,54 @@ else {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Tabel Admin</h3> <br>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
-                  Add
-                </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">N0</th>
-                      <th>Nama</th>
-                      <th>Email</th>
-                      <th>Hp</th>
-                      <th>Alamat</th>
-                      <th>Rules</th>
-                      <th style="width: 200px">aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                $queri ="SELECT * FROM admin ";
-                $hasil =mysqli_query($koneksi,$queri);
-                $no = 1;
-                while ($admin=mysqli_fetch_assoc($hasil)) { ?>
-                    <tr>
-                      <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$admin[name]"; ?></td>
-                      <td><?php echo "$admin[email]"; ?></td>
-                      <td><?php echo "$admin[hp]"; ?></td>
-                      <td><?php echo "$admin[alamat]"; ?></td>
-                      <td><?php echo "$admin[rules]"; ?></td>
-                      <td>
-                        <a href="admin-edit.php?id=<?php echo "$admin[id]"; ?>" class="btn btn-warning" ><i class="fas fa-edit" ></i></a>
-                        <a href="admin-delete.php?id=<?php echo "$admin[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                        <a href="../assets/admin/<?php echo "$admin[foto]" ?>" data-toggle="lightbox" data-title="<?php echo "$admin[name]"; ?>" class="btn btn-info">
-                           <i class="nav-icon far fa-image"></i>
-                        </a>
-                      </td>
-                    </tr>
-
-                    <?php include 'model-edit-admin.php';
-                        $no=$no+1;
-                 } 
-                 ?>
-                  </tbody>
-                </table>
-              </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Item Yang dipesan</h4>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"> 
+                          Add 
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">N0</th>
+                                    <th>Kategori</th>
+                                    <th>Makanan</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>Foto</th>
+                                    <th style="width: 10px">aksi</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            $q_ketring="SELECT * FROM ketring INNER JOIN makanan on ketring.id_makanan=makanan.id
+                                                              INNER JOIN kategori_makanan on makanan.id_kategori = kategori_makanan.id_kategori WHERE pesanan_id='$_GET[id]'";
+                            $hasil_ketring=mysqli_query($koneksi,$q_ketring);
+                            $nok=1;
+                            while($ket=mysqli_fetch_assoc($hasil_ketring)){
+                              $uang="Rp ".number_format($ket['harga'],2,',','.');?>
+                                <tr>
+                                  <td><?php echo "$nok"; ?></td>
+                                  <td><?php echo "$ket[kategori]"; ?></td>
+                                  <td><?php echo "$ket[makanan]"; ?></td>
+                                  <td><?php echo "$uang"; ?></td>
+                                  <td><?php echo "$ket[jumlah]"; ?></td>
+                                  <td>
+                                  <a href="../assets/makanan/<?php echo "$ket[gambar]" ?>" data-toggle="lightbox" data-title="<?php echo "$ket[makanan]"; ?>" class="btn btn-info">
+                                    <i class="nav-icon far fa-image"></i>
+                                  </td>
+                                  <td> <a href="ketring-delete.php?id=<?php echo "$ket[id_ketring]"; ?> & idp=<?php echo "$_GET[id]"; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                            <?php $nok=$nok+1; }
+                            ?>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -111,15 +111,7 @@ else {
   </div>
   <!-- /.content-wrapper -->
   <?php include 'template/footer.php'; ?>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-    <div class="modal fade" id="add">
+  <div class="modal fade" id="add">
         <div class="modal-dialog">
             <div class="modal-content ">
                 <div class="modal-header">
@@ -129,44 +121,33 @@ else {
                     </button>
                 </div>
                 <div class="modal-body">
-                <form  action="admin_add_proses.php" method="post" enctype="multipart/form-data">
+                <form  action="ketring_add_proses.php" method="post" enctype="multipart/form-data">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="rules">Rules</label>
-                            <select class="custom-select rounded-0" id="rules" name="rules">
-                              <option value="super">Super Admin</option>
-                              <option value="admin">admin</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Enter Full Name" name="nama">
-                        </div>
-                        <div class="form-group">
-                            <label for="hp">No Hp</label>
-                            <input type="text" class="form-control" id="hp" placeholder="Enter Full No Hp" name="hp">
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" placeholder="Enter Full Alamat" name="alamat">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="pass">Password</label>
-                            <input type="password" class="form-control" id="pass" placeholder="Password" name="pass">
-                        </div>
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <div class="input-group">
-                              <div class="custom-file">
-                                  <input type="file" class="custom-file-input" id="foto" name="foto">
-                                  <label class="custom-file-label" for="foto">Choose file</label>
-                              </div>
-                            </div>
-                        </div>
+                      <div class="form-group">
+                        <label>Makanan</label>
+                        <select class="custom-select" name="makanan">
+                        <?php 
+                          $queri ="SELECT * FROM makanan INNER JOIN kategori_makanan on makanan.id_kategori = kategori_makanan.id_kategori ";
+                          $hasil =mysqli_query($koneksi,$queri);
+                          while ($item=mysqli_fetch_assoc($hasil)) { 
+                              
+                          $cek = "SELECT * FROM ketring WHERE id_makanan='$item[id]'";
+                          $result = mysqli_query($koneksi, $cek);
+                          $ketemu=mysqli_num_rows($result);
+                          if ($ketemu > 0) {}else{
+
+                          ?>
+                          <option value="<?php echo "$item[id]"; ?>"><?php echo "$item[kategori]"; ?> || <?php echo "$item[makanan]"; ?></option>
+                          <?php
+                                }
+                            } ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="text" class="form-control" id="jumlah" placeholder="Enter Jumlah Makanan" name="jumlah">
+                      </div>
+                          <input type="text" class="form-control" id="pesanan"  name="pesanan" value="<?php echo"$_GET[id]"; ?>" hidden>
                     </div>
                     <!-- /.card-body -->
 
@@ -182,6 +163,14 @@ else {
       
         </div>
     </div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

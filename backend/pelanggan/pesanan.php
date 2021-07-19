@@ -51,7 +51,7 @@ else {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tabel Pesanan</h3> <br>
@@ -62,8 +62,8 @@ else {
                   <thead>
                     <tr>
                       <th style="width: 10px">N0</th>
-                      <th>Pelanggan</th>
                       <th>Paket</th>
+                      <th>Ketring</th>
                       <th>Tanggal Pemesanan</th>
                       <th>Tanggal Pesta</th>
                       <th>Alamat Pesta</th>
@@ -76,11 +76,18 @@ else {
                     $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE pelanggan_id = '$_SESSION[id]' ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $no = 1;
-                    while ($paket=mysqli_fetch_assoc($hasil)) { ?>
+                    while ($paket=mysqli_fetch_assoc($hasil)) {
+                      $Q_ketring=mysqli_query($koneksi,"SELECT * FROM ketring WHERE pesanan_id='$paket[id_pesanan]'");
+                      $cek=mysqli_num_rows($Q_ketring);
+                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$_SESSION[name]"; ?></td>
                       <td><?php echo "$paket[paket]"; ?></td>
+                      <td>
+                        <?php if ($cek >0) {
+                          echo "Ketring";
+                        }else{ echo "--"; } ?>
+                      </td>
                       <td><?php echo "$paket[tgl_pesan]"; ?></td>
                       <td><?php echo "$paket[tgl_pesta]"; ?></td>
                       <td><?php echo "$paket[alamat]"; ?></td>
