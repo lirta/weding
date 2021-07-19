@@ -12,10 +12,11 @@ include '../config/config.php';
     
     			move_uploaded_file($folderawal,$foldertujuan.$nama);
     
-    $queri= "INSERT INTO pembayaran (pesanan_id,jumlah,bukti) VALUES (
+    $queri= "INSERT INTO pembayaran (pesanan_id,jumlah,bukti,reg) VALUES (
                                     '$_POST[id]',
                                     '$_POST[jumlah]',
-                                    '$nama'
+                                    '$nama',
+                                    '$_POST[reg]'
                                 )";
                                 // echo ($queri);
     

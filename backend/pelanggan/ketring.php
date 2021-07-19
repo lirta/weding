@@ -131,7 +131,7 @@ else {
                           $hasil =mysqli_query($koneksi,$queri);
                           while ($item=mysqli_fetch_assoc($hasil)) { 
                               
-                          $cek = "SELECT * FROM ketring WHERE id_makanan='$item[id]'";
+                          $cek = "SELECT * FROM ketring WHERE id_makanan='$item[id]' and  pesanan_id='$_GET[id]'";
                           $result = mysqli_query($koneksi, $cek);
                           $ketemu=mysqli_num_rows($result);
                           if ($ketemu > 0) {}else{

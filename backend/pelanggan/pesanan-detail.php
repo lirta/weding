@@ -50,92 +50,18 @@ else {
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card card-primary card-outline">
-                    <div class="card-body box-profile">
                     <?php 
                     $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE id_pesanan = '$_GET[id]' ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $paket=mysqli_fetch_assoc($hasil); ?>
-                        <h3 class="profile-username text-center"><?php echo "$paket[paket]"; ?></h3>
-
-                        <strong>Total Harga</strong>
-                        <?php 
-                        $total =mysqli_query($koneksi,"SELECT SUM(harga) as total  FROM daftar_item INNER JOIN item_paket on daftar_item.item_id = item_paket.id WHERE  paket_id ='$paket[paket_id]' ");
-                        $tt=mysqli_fetch_assoc($total); 
-                        $uang="Rp ".number_format($tt['total'],2,',','.');
-                        ?>
-                        <p class="text-muted"><?php echo "$uang"; ?></p>
-                        <hr>
-                        <strong>Total pembayaran</strong>
-                        <?php 
-                        $sub_total =mysqli_query($koneksi,"SELECT SUM(jumlah) as sub_total  FROM pembayaran WHERE  pesanan_id ='$paket[id_pesanan]' ");
-                        $s_tt=mysqli_fetch_assoc($sub_total);
-                        $uangb="Rp ".number_format($s_tt['sub_total'],2,',','.');
-                        ?>
-                        <p class="text-muted"><?php echo "$uangb"; ?></p>
-                        <hr>
-                        <strong>Total Sisa</strong>
-                        <?php 
-                        $sisa=$tt['total'] - $s_tt['sub_total']; 
-                        $uangg="Rp ".number_format($sisa,2,',','.'); ?>
-                        <p class="text-muted"><?php echo "$uangg"; ?></p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">Ketring</h3> <br>
-                  <?php 
-                    $querik ="SELECT * FROM kategori_makanan ";
-                    $hasilk =mysqli_query($koneksi,$querik);
-                    while ($ket=mysqli_fetch_assoc($hasilk)) {
-                      ?>
-                  <a href="ketring.php?idm=<?php echo "$ket[id_kategori]";?>&&idp=<?php echo "$_GET[id]"; ?>" class="btn btn-primary btn-md">+ <?php echo "$ket[kategori]";?></a>
-                  <?php } ?>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <table class="table table-bordered">
-                    <thead>
+        
+                        <?php if ($paket['paket'] == "Custom") {
+                          include "pesanan-sub-detail-costum.php";
+                        }else{ include "pesanan-sub-detail.php";} ?>
+                        
                     
-                      <tr>
-                        <th style="width: 10px">N0</th>
-                        <th>Makanan</th>
-                        <th>Kategori</th>
-                        <th>Jumlah</th>
-                        <th>aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                      $qr =mysqli_query($koneksi,"SELECT *  FROM pembayaran WHERE  pesanan_id ='$paket[id_pesanan]' ");
-                      $no=1;
-                      while($pem=mysqli_fetch_assoc($qr)){
-                        $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>
-                      <tr>
-                        <td>1.</td>
-                        <td><?php echo "$pem_t";?></td>
-                        <td>
-                          <a href="../assets/pembayaran/<?php echo "$pem[bukti]";?>" data-toggle="lightbox" data-title="<?php echo "$pem_t";?>">
-                          <?php echo "$pem[bukti]";?>
-                          </a>
-                        </td>
-                        <td>
-                          <a href="pembayaran-delete.php?id=<?php echo "$pem[id]"; ?> && ps=<?php echo "$paket[id_pesanan]"; ?> " class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
-                      </tr>
-                      <?php $no++; } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-        </div>
         <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-6">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Tabel Pembayaran</h3> <br>
@@ -150,6 +76,7 @@ else {
                   
                     <tr>
                       <th style="width: 10px">N0</th>
+                      <th>No Reg</th>
                       <th>Jumlah</th>
                       <th>Bukti Pembayaran</th>
                       <th>Aksi</th>
@@ -162,7 +89,8 @@ else {
                     while($pem=mysqli_fetch_assoc($qr)){
                       $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>
                     <tr>
-                      <td>1.</td>
+                      <td><?php echo "$no";?></td>
+                      <td><?php echo "$pem[reg]";?></td>
                       <td><?php echo "$pem_t";?></td>
                       <td>
                         <a href="../assets/pembayaran/<?php echo "$pem[bukti]";?>" data-toggle="lightbox" data-title="<?php echo "$pem_t";?>">
@@ -207,6 +135,10 @@ else {
                   <form method="post" action="pembayaran-add-proses.php" enctype="multipart/form-data">
                   <input type="text" class="form-control" id="id"  placeholder="Enter email" name="id" value="<?php echo "$_GET[id]"; ?>" hidden>
                       <div class="card-body">
+                        <div class="form-group">
+                            <label for="reg">No Reg</label>
+                            <input type="text" class="form-control" id="reg" placeholder="Enter No Reg" name="reg">
+                        </div>
                         <div class="form-group">
                             <label for="jumlah">Jumlah</label>
                             <input type="text" class="form-control" id="jumlah" placeholder="Enter Jumlah" name="jumlah">
