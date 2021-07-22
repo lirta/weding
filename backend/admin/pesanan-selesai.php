@@ -71,14 +71,15 @@ else {
                   </thead>
                   <tbody>
                   <?php 
-                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  WHERE status='selesai'  ";
+                  $queri ="SELECT * FROM pesanan inner join paket on pesanan.paket_id = paket.id  
+                                                inner join pelanggan on pesanan.pelanggan_id=pelanggan.id WHERE status='selesai'  ";
                     $hasil =mysqli_query($koneksi,$queri);
                     $no = 1;
                     while ($paket=mysqli_fetch_assoc($hasil)) {
                       ?>
                     <tr>
                       <td><?php echo "$no"; ?></td>
-                      <td><?php echo "$_SESSION[name]"; ?></td>
+                      <td><?php echo "$paket[name]"; ?></td>
                       <td><?php echo "$paket[paket]"; ?></td>
                       <td><?php echo "$paket[tgl_pesan]"; ?></td>
                       <td><?php echo "$paket[tgl_pesta]"; ?></td>

@@ -73,7 +73,7 @@
                   </thead>
                   <tbody>
                   <?php 
-                    $qr =mysqli_query($koneksi,"SELECT *  FROM pembayaran WHERE  pesanan_id ='$paket[id_pesanan]' ");
+                    $qr =mysqli_query($koneksi,"SELECT *  FROM pembayaran WHERE  pesanan_id ='$_GET[id]' ");
                     $no=1;
                     while($pem=mysqli_fetch_assoc($qr)){
                       $pem_t="Rp ".number_format($pem['jumlah'],2,',','.'); ?>

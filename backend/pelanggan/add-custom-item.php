@@ -124,7 +124,7 @@ else {
                                 $no = 1;
                                 while ($item=mysqli_fetch_assoc($hasil)) { 
                                     
-                                $cek = "SELECT * FROM custom WHERE id_item='$item[id]'";
+                                $cek = "SELECT * FROM custom WHERE id_item='$item[id]' and id_pesanan='$_GET[id]'";
                                 $result = mysqli_query($koneksi, $cek);
                                 $ketemu=mysqli_num_rows($result);
                                 if ($ketemu > 0) {}else{

@@ -83,6 +83,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="pelanggan.php" class="nav-link">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Pelanggan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-invoice"></i>
               <p>
@@ -118,10 +126,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pelanggan.php" class="nav-link">
+            <a href="jadwal.php" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Pelanggan
+                Jadwal Acara
               </p>
             </a>
           </li>
