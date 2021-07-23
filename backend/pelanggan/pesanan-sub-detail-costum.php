@@ -1,4 +1,4 @@
-<div class="row">
+                                                                                                                                                                                                                    <div class="row">
     <div class="col-md-3">
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
@@ -59,9 +59,9 @@
                   Pembayaran
                 </button>
               </div>
-              <!-- /.card-header -->
+               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                 <table class="table table-bordered">
                   <thead>
                   
                     <tr>
@@ -101,6 +101,10 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Paket Wedding</h3> <br>
+                <?php if ($paket['status'] == "konfirmasi") { ?>
+                    
+                    <a href="add-custom-item.php?id=<?php echo "$_GET[id]";?>" class="btn btn-warning">Edit</a>
+               <?php } ?>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">

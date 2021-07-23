@@ -77,8 +77,12 @@ else {
                                 $q_item ="SELECT * FROM custom INNER JOIN  item_paket ON custom.id_item = item_paket.id WHERE id_pesanan='$_GET[id]'";
                                 $h_item =mysqli_query($koneksi,$q_item);
                                 $no_item = 1;
+                                $total=0;
                                 while ($custom=mysqli_fetch_assoc($h_item)) { 
-                                $uang_custom="Rp ".number_format($custom['harga'],2,',','.');?>
+                                $uang_custom="Rp ".number_format($custom['harga'],2,',','.');
+                                $total=$total+$custom['harga'];
+                                $totall="Rp ".number_format($total,2,',','.');
+                                ?>
                                 <tr>
                                 <td><?php echo "$no_item"; ?></td>
                                 <td><?php echo "$custom[item]"; ?></td>
@@ -95,6 +99,10 @@ else {
                                 <?php 
                                     $no_item=$no_item+1;
                             } ?>
+                                <tr>
+                                  <td colspan="2"><b>Total Harga</b></td>
+                                  <td colspan="3"><b><?php echo "$totall"; ?></b></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
