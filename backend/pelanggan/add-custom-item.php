@@ -78,6 +78,7 @@ else {
                                 $h_item =mysqli_query($koneksi,$q_item);
                                 $no_item = 1;
                                 $total=0;
+                                $totall=0;
                                 while ($custom=mysqli_fetch_assoc($h_item)) { 
                                 $uang_custom="Rp ".number_format($custom['harga'],2,',','.');
                                 $total=$total+$custom['harga'];
